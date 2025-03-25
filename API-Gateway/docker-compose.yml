@@ -1,0 +1,58 @@
+version: '3.8'
+
+services:
+  gateway:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+    depends_on:
+      - ai-service
+      - auth-service
+      - content-service
+      - de-service
+      - plans-service
+      - users-service
+
+  ai-service:
+    build:
+      context: ../AI-Service
+      dockerfile: Dockerfile
+    ports:
+      - "5001:80"
+
+  auth-service:
+    build:
+      context: ../Authentication-Service
+      dockerfile: Dockerfile
+    ports:
+      - "5002:80"
+
+  content-service:
+    build:
+      context: ../Content-Service
+      dockerfile: Dockerfile
+    ports:
+      - "5003:80"
+
+  de-service:
+    build:
+      context: ../Data-Extraction-Service
+      dockerfile: Dockerfile
+    ports:
+      - "5004:80"
+
+  plans-service:
+    build:
+      context: ../Plans-Service
+      dockerfile: Dockerfile
+    ports:
+      - "5005:80"
+
+  users-service:
+    build:
+      context: ../Users-Service
+      dockerfile: Dockerfile
+    ports:
+      - "5006:80"
