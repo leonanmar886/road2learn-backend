@@ -30,3 +30,12 @@
 *.exe
 *.out
 *.app
+
+*.cache
+Users-Service/obj/
+Plans-Service/obj/
+Data-Extraction-Service/obj/
+Content-Service/obj/
+Authentication-Service/obj/
+AI-Service/obj/
+API-Gateway/obj/
