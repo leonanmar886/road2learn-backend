@@ -1,0 +1,19 @@
+include:
+  - ../authService/compose.yaml
+  - ../studyPlansService/compose.yaml
+  - ../notificationService/compose.yaml
+services:
+  api-gateway:
+    build: .
+    ports:
+      - "8000:8000"
+    depends_on:
+      - authentication-service
+      - study-plans-service
+      - notifications-service
+    networks:
+      - microservices-network
+
+networks:
+  microservices-network:
+    driver: bridge
