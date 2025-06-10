@@ -4,6 +4,5 @@
 **/*.xml
 **/*.json
 .idea/
-.gradle/
-gradle/
 build
+.gradle
