@@ -1,0 +1,86 @@
+name: Notifications Service CI
+
+on:
+  push:
+    branches: [ "main", "develop" ]
+    paths:
+      - 'notificationService/**'
+  pull_request:
+    branches: [ "main", "develop" ]
+    paths:
+      - 'notificationService/**'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+      security-events: write
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Cache Gradle packages
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@af1da67850ed9a4cedd57bfd976089dd991e2582 # v4.0.0
+
+      - name: Check Dependencies
+        run: ./gradlew :notificationService:dependencyCheckAnalyze
+
+      - name: Check Code Format
+        run: ./gradlew :notificationService:spotlessCheck
+
+
+      - name: Build and Test Notifications Service
+        run: ./gradlew :notificationService:build :notificationService:jacocoTestReport
+
+      - name: SonarQube Scan
+        uses: SonarSource/sonarqube-scan-action@master
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+        with:
+          args: >
+            -Dsonar.projectKey=r2l-backend-notifications
+            -Dsonar.projectName=Notifications Service
+            -Dsonar.java.binaries=./notificationService/build/classes
+            -Dsonar.java.source=17
+            -Dsonar.coverage.jacoco.xmlReportPaths=./notificationService/build/reports/jacoco/test/jacocoTestReport.xml
+            -Dsonar.sources=./notificationService/src/main/java
+            -Dsonar.tests=./notificationService/src/test/java
+            -Dsonar.java.source=17
+            -Dsonar.qualitygate.wait=true
+
+  dependency-submission:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Generate and submit dependency graph
+        uses: gradle/actions/dependency-submission@af1da67850ed9a4cedd57bfd976089dd991e2582 # v4.0.0

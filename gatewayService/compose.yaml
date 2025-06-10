@@ -1,0 +1,11 @@
+services:
+  api-gateway:
+    build: .
+    ports:
+      - "8000:8000"
+    depends_on:
+      - authentication-service
+      - study-plans-service
+      - notifications-service
+    networks:
+      - microservices-network

@@ -1,0 +1,20 @@
+services:
+  study-plans-service:
+    build: .
+    ports:
+      - "8002:8002"
+    depends_on:
+      - study-plans-db
+    networks:
+      - microservices-network
+
+  study-plans-db:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: "dev"
+      POSTGRES_PASSWORD: "dev"
+      POSTGRES_DB: "study-plans-database"
+    ports:
+      - "5434:5432"
+    networks:
+      - microservices-network

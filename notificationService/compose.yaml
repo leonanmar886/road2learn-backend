@@ -1,0 +1,20 @@
+services:
+  notifications-service:
+    build: .
+    ports:
+      - "8003:8003"
+    depends_on:
+      - notifications-db
+    networks:
+      - microservices-network
+
+  notifications-db:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: "dev"
+      POSTGRES_PASSWORD: "dev"
+      POSTGRES_DB: "notifications-database"
+    ports:
+      - "5435:5432"
+    networks:
+      - microservices-network

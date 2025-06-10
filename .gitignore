@@ -1,41 +1,9 @@
-# Prerequisites
-*.d
-
-# Compiled Object files
-*.slo
-*.lo
-*.o
-*.obj
-
-# Precompiled Headers
-*.gch
-*.pch
-
-# Compiled Dynamic libraries
-*.so
-*.dylib
-*.dll
-
-# Fortran module files
-*.mod
-*.smod
-
-# Compiled Static libraries
-*.lai
-*.la
-*.a
-*.lib
-
-# Executables
-*.exe
-*.out
-*.app
-
-*.cache
-Users-Service/obj/
-Plans-Service/obj/
-Data-Extraction-Service/obj/
-Content-Service/obj/
-Authentication-Service/obj/
-AI-Service/obj/
-API-Gateway/obj/
+# No .gitignore da pasta principal
+**/target/
+**/*.jar
+**/*.xml
+**/*.json
+.idea/
+.gradle/
+gradle/
+build
