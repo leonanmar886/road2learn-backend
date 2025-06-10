@@ -1,0 +1,9 @@
+include:
+  - ./gatewayService/compose.yaml
+  - ./authService/compose.yaml
+  - ./studyPlansService/compose.yaml
+  - ./notificationService/compose.yaml
+
+networks:
+  microservices-network:
+    driver: bridge

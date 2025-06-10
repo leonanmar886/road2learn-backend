@@ -1,7 +1,3 @@
-include:
-  - ../authService/compose.yaml
-  - ../studyPlansService/compose.yaml
-  - ../notificationService/compose.yaml
 services:
   api-gateway:
     build: .
@@ -13,7 +9,3 @@ services:
       - notifications-service
     networks:
       - microservices-network
-
-networks:
-  microservices-network:
-    driver: bridge
