@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: r2l-study-plans-service
+server:
+  port: 8002
+gateway:
+  secret: ${GATEWAY_SECRET:r2l-gateway-secret}
