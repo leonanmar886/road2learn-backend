@@ -1,4 +1,3 @@
-// Configuração dos repositórios para todos os projetos
 allprojects {
     repositories {
         mavenCentral()
@@ -28,23 +27,18 @@ allprojects {
         finalizedBy jacocoTestReport
     }
 
-    // Configuração do Spotless
     spotless {
         java {
             googleJavaFormat()
-            licenseHeader '/* Copyright (C) $YEAR */' // Opcional
         }
     }
 
-    // Configuração do OWASP Dependency Check
     dependencyCheck {
         formats = ['HTML', 'XML']
         failBuildOnCVSS = 7
-        suppressionFiles = ['owasp-suppressions.xml'] // Opcional
     }
 }
 
-// Configuração dos plugins
 buildscript {
     repositories {
         mavenCentral()

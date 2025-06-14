@@ -1,0 +1,40 @@
+spring:
+  application:
+    name: r2l-authentication-service
+  datasource:
+    url: jdbc:postgresql://localhost:5433/authentication-database
+    username: dev
+    password: dev
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+gateway:
+  secret: ${GATEWAY_SECRET:r2l-gateway-secret}
+
+server:
+  port: 8001
+
+logging:
+  level:
+    root: INFO
+    com.r2l.authService: TRACE
+    org.springframework.web: TRACE
+    org.springframework.security: TRACE
+    org.springframework.http: TRACE
+    org.springframework.web.filter: TRACE
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+  file:
+    path: D:/Road2Learn/r2l-backend/logs
+    name: ${logging.file.path}/auth-service.log
+  logback:
+    rollingpolicy:
+      max-file-size: 10MB
+      max-history: 7
