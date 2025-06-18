@@ -1,7 +1,7 @@
 spring:
   application:
-    name: r2l-notification-service
+    name: r2l-users-service
 server:
-  port: 8000
+  port: 8006
 gateway:
   secret: ${GATEWAY_SECRET:r2l-gateway-secret}
