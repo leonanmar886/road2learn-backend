@@ -7,5 +7,6 @@ services:
       - authentication-service
       - study-plans-service
       - notifications-service
+      - users-service
     networks:
       - microservices-network

@@ -5,4 +5,7 @@ RUN gradle build -x test
 
 FROM amazoncorretto:17-alpine3.17-jdk
 COPY --from=build /app/build/libs/*.jar app.jar
+
 ENTRYPOINT ["java", "-jar", "/app.jar"]
+
+CMD ["--spring.profiles.active=docker"]

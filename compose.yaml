@@ -3,6 +3,7 @@ include:
   - ./authService/compose.yaml
   - ./studyPlansService/compose.yaml
   - ./notificationService/compose.yaml
+  - ./userService/compose.yaml
 
 networks:
   microservices-network:
