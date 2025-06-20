@@ -15,6 +15,12 @@ spring:
         format_sql: true
         dialect: org.hibernate.dialect.PostgreSQLDialect
 
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+
 gateway:
   secret: ${GATEWAY_SECRET:r2l-gateway-secret}
 
