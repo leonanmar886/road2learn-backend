@@ -10,13 +10,10 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class CreateUserProducer {
 
-	private final RabbitTemplate rabbitTemplate;
+  private final RabbitTemplate rabbitTemplate;
 
-	public void send(CreateUserProfileDTO payload) {
-		rabbitTemplate.convertAndSend(
-				RabbitMQConfig.USER_CREATED_EXCHANGE,
-				RabbitMQConfig.USER_CREATED_ROUTING_KEY,
-				payload
-		);
-	}
+  public void send(CreateUserProfileDTO payload) {
+    rabbitTemplate.convertAndSend(
+        RabbitMQConfig.USER_CREATED_EXCHANGE, RabbitMQConfig.USER_CREATED_ROUTING_KEY, payload);
+  }
 }

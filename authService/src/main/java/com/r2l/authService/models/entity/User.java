@@ -15,22 +15,22 @@ import java.util.UUID;
 @NoArgsConstructor
 @Data
 public class User implements Serializable {
-	@Id
-	@GeneratedValue(strategy = GenerationType.UUID)
-	private UUID id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.UUID)
+  private UUID id;
 
-	@Column(nullable = false)
-	private String name;
+  @Column(nullable = false)
+  private String name;
 
-	@Column(nullable = false, unique = true)
-	@Email
-	private String email;
+  @Column(nullable = false, unique = true)
+  @Email
+  private String email;
 
-	@Column(nullable = false)
-	private String password;
+  @Column(nullable = false)
+  private String password;
 
-	public User(String name, String email) {
-		this.name = name;
-		this.email = email;
-	}
+  public User(String name, String email) {
+    this.name = name;
+    this.email = email;
+  }
 }

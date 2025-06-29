@@ -8,19 +8,13 @@ import org.springframework.validation.annotation.Validated;
 
 @Validated
 public record CreateUserRequestDTO(
-
-		@NotBlank(message = "User name cannot be blank")
-		String name,
-
-		@NotBlank(message = "User email cannot be blank")
-		@Email(message = "Invalid email")
-		String email,
-
-		@NotBlank(message = "Password cannot be blank")
-		@Size(min = 8, message = "Password must be at least 8 characters long")
-		String password
-) {
-	public User toModel() {
-		return new User(name, email);
-	}
+    @NotBlank(message = "User name cannot be blank") String name,
+    @NotBlank(message = "User email cannot be blank") @Email(message = "Invalid email")
+        String email,
+    @NotBlank(message = "Password cannot be blank")
+        @Size(min = 8, message = "Password must be at least 8 characters long")
+        String password) {
+  public User toModel() {
+    return new User(name, email);
+  }
 }

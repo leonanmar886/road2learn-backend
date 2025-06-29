@@ -15,28 +15,28 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class AuthenticationService {
 
-	private final UserRepository userRepository;
+  private final UserRepository userRepository;
 
-	private final CreateUserProducer createUserProducer;
+  private final CreateUserProducer createUserProducer;
 
-	private final PasswordEncoder passwordEncoder;
+  private final PasswordEncoder passwordEncoder;
 
-	@Transactional
-	public void createUser(CreateUserRequestDTO request){
-		User newUser = request.toModel();
+  @Transactional
+  public void createUser(CreateUserRequestDTO request) {
+    User newUser = request.toModel();
 
-		if (userRepository.findByEmail(newUser.getEmail()).isPresent()){
-			throw new UserAlreadyExists("A user with this email already was registered.");
-		}
+    if (userRepository.findByEmail(newUser.getEmail()).isPresent()) {
+      throw new UserAlreadyExists("A user with this email already was registered.");
+    }
 
-		newUser.setPassword(passwordEncoder.encode(request.password()));
+    newUser.setPassword(passwordEncoder.encode(request.password()));
 
-		try {
-			newUser = userRepository.save(newUser);
-			createUserProducer.send(CreateUserProfileDTO.fromModel(newUser));
-		} catch (Exception e) {
-			userRepository.delete(newUser);
-			throw new CreateUserProfileException("Error creating user profile: " + e.getMessage());
-		}
-	}
+    try {
+      newUser = userRepository.save(newUser);
+      createUserProducer.send(CreateUserProfileDTO.fromModel(newUser));
+    } catch (Exception e) {
+      userRepository.delete(newUser);
+      throw new CreateUserProfileException("Error creating user profile: " + e.getMessage());
+    }
+  }
 }

@@ -15,12 +15,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class AuthenticationController {
 
-	private final AuthenticationService authenticationService;
+  private final AuthenticationService authenticationService;
 
-	@PostMapping()
-	public ResponseEntity<String> createUser(@RequestBody @Valid CreateUserRequestDTO body) {
-		authenticationService.createUser(body);
-		return ResponseEntity.ok("Success");
-	}
+  @PostMapping()
+  public ResponseEntity<String> createUser(@RequestBody @Valid CreateUserRequestDTO body) {
+    authenticationService.createUser(body);
+    return ResponseEntity.ok("Success");
+  }
 }
-

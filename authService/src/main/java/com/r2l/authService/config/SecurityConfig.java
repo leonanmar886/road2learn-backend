@@ -15,24 +15,22 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableWebSecurity
 public class SecurityConfig {
 
-    @Bean
-    public GatewaySecurityFilter gatewaySecurityFilter() {
-        return new GatewaySecurityFilter();
-    }
+  @Bean
+  public GatewaySecurityFilter gatewaySecurityFilter() {
+    return new GatewaySecurityFilter();
+  }
 
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
+  @Bean
+  public PasswordEncoder passwordEncoder() {
+    return new BCryptPasswordEncoder();
+  }
 
-    @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http, GatewaySecurityFilter gatewaySecurityFilter) throws Exception {
-        http
-            .csrf(AbstractHttpConfigurer::disable)
-            .authorizeHttpRequests(auth -> auth
-                .anyRequest().permitAll()
-            )
-            .addFilterBefore(gatewaySecurityFilter, UsernamePasswordAuthenticationFilter.class);
-        return http.build();
-    }
+  @Bean
+  public SecurityFilterChain securityFilterChain(
+      HttpSecurity http, GatewaySecurityFilter gatewaySecurityFilter) throws Exception {
+    http.csrf(AbstractHttpConfigurer::disable)
+        .authorizeHttpRequests(auth -> auth.anyRequest().permitAll())
+        .addFilterBefore(gatewaySecurityFilter, UsernamePasswordAuthenticationFilter.class);
+    return http.build();
+  }
 }
