@@ -1,0 +1,10 @@
+rootProject.name = 'road2learn-backend'
+
+include 'authService'
+include 'contentService'
+include 'gatewayService'
+include 'iaService'
+include 'notificationService'
+include 'studyPlansService'
+include 'userService'
+include 'textAnalysisExtractionService'
