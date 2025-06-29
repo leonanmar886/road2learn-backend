@@ -1,7 +1,6 @@
 package com.r2l.userService.models.entity;
 
 import jakarta.persistence.*;
-
 import java.util.UUID;
 
 @Entity

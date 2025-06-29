@@ -2,12 +2,11 @@ package com.r2l.authService.models.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
+import java.io.Serializable;
+import java.util.UUID;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.io.Serializable;
-import java.util.UUID;
 
 @Entity
 @Table(name = "users")

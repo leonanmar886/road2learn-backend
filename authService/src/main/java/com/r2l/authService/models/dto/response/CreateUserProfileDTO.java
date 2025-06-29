@@ -1,7 +1,6 @@
 package com.r2l.authService.models.dto.response;
 
 import com.r2l.authService.models.entity.User;
-
 import java.util.UUID;
 
 public record CreateUserProfileDTO(UUID id, String name, String email) {
