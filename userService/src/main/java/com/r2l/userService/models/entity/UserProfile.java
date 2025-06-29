@@ -8,14 +8,13 @@ import java.util.UUID;
 @Table(name = "user-profile")
 public class UserProfile {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.UUID)
-	private UUID id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.UUID)
+  private UUID id;
 
-	@Column(nullable = false, unique = true)
-	private UUID userId;
+  @Column(nullable = false, unique = true)
+  private UUID userId;
 
-	@Column(nullable = false)
-	private String username;
-
+  @Column(nullable = false)
+  private String username;
 }

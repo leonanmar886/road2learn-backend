@@ -8,9 +8,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class CreateUserConsumer {
 
-	@RabbitListener(queues = RabbitMQConfig.USER_CREATED_QUEUE)
-	public void receive(UserProfileCreationDTO payload) {
-		System.out.println("Received: " + payload);
-	}
-
+  @RabbitListener(queues = RabbitMQConfig.USER_CREATED_QUEUE)
+  public void receive(UserProfileCreationDTO payload) {
+    System.out.println("Received: " + payload);
+  }
 }
