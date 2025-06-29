@@ -13,6 +13,11 @@ public class GlobalExceptionHandler {
 		return ResponseEntity.status(HttpStatus.CONFLICT).body(ex.getMessage());
 	}
 
+	@ExceptionHandler(CreateUserProfileException.class)
+	public ResponseEntity<String> handleCreateUserProfileException(CreateUserProfileException ex) {
+		return ResponseEntity.status(HttpStatus.FAILED_DEPENDENCY).body(ex.getMessage());
+	}
+
 	@ExceptionHandler(Exception.class)
 	public ResponseEntity<String> handleGeneric(Exception ex) {
 		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
