@@ -53,7 +53,7 @@ jobs:
 
 
       - name: Build and Test Notifications Service
-        run: ./gradlew :notificationService:build :notificationService:jacocoTestReport
+        run: ./gradlew :notificationService:build
 
       - name: SonarQube Scan
         uses: SonarSource/sonarqube-scan-action@master

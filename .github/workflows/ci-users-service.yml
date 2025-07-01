@@ -52,7 +52,7 @@ jobs:
         run: ./gradlew :userService:spotlessCheck
 
       - name: Build and Test User Service
-        run: ./gradlew :userService:build :userService:jacocoTestReport
+        run: ./gradlew :userService:build
 
       - name: SonarQube Scan
         uses: SonarSource/sonarqube-scan-action@master
