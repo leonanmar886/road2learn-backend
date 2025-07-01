@@ -54,7 +54,6 @@ jobs:
       - name: Build and Test Auth Service
         run: ./gradlew :authService:build --exclude-task test
 
-
       - name: SonarQube Scan
         uses: SonarSource/sonarqube-scan-action@master
         env:
