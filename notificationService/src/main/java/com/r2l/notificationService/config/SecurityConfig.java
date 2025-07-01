@@ -8,11 +8,11 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class SecurityConfig {
 
-    @Bean
-    public FilterRegistrationBean<GatewaySecurityFilter> gatewaySecurityFilter() {
-        FilterRegistrationBean<GatewaySecurityFilter> registrationBean = new FilterRegistrationBean<>();
-        registrationBean.setFilter(new GatewaySecurityFilter());
-        registrationBean.addUrlPatterns("/*");
-        return registrationBean;
-    }
-} 
+  @Bean
+  public FilterRegistrationBean<GatewaySecurityFilter> gatewaySecurityFilter() {
+    FilterRegistrationBean<GatewaySecurityFilter> registrationBean = new FilterRegistrationBean<>();
+    registrationBean.setFilter(new GatewaySecurityFilter());
+    registrationBean.addUrlPatterns("/*");
+    return registrationBean;
+  }
+}
