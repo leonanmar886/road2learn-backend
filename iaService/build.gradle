@@ -65,4 +65,7 @@ spotless {
 dependencyCheck {
 	formats = ['HTML', 'XML']
 	failBuildOnCVSS = 7
+	analyzers {
+		assemblyEnabled = false
+	}
 }
