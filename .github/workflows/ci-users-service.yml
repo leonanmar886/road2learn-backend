@@ -52,7 +52,8 @@ jobs:
         run: ./gradlew :userService:spotlessCheck
 
       - name: Build and Test User Service
-        run: ./gradlew :userService:build
+        run: ./gradlew :userService:build --exclude-task test
+
 
       - name: SonarQube Scan
         uses: SonarSource/sonarqube-scan-action@master

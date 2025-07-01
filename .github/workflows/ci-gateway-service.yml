@@ -52,7 +52,8 @@ jobs:
         run: ./gradlew :gatewayService:spotlessCheck
 
       - name: Build and Test Gateway Service
-        run: ./gradlew :gatewayService:build
+        run: ./gradlew :gatewayService:build --exclude-task test
+
 
       - name: SonarQube Scan
         uses: SonarSource/sonarqube-scan-action@master

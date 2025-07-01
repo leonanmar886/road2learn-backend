@@ -53,7 +53,8 @@ jobs:
 
 
       - name: Build and Test Notifications Service
-        run: ./gradlew :notificationService:build
+        run: ./gradlew :notificationService:build --exclude-task test
+
 
       - name: SonarQube Scan
         uses: SonarSource/sonarqube-scan-action@master

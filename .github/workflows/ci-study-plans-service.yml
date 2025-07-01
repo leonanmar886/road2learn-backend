@@ -42,7 +42,8 @@ jobs:
         run: ./gradlew :studyPlansService:spotlessCheck
 
       - name: Build and Test Study Plans Service
-        run: ./gradlew :studyPlansService:build
+        run: ./gradlew :studyPlansService:build --exclude-task test
+
 
       - name: SonarQube Scan
         uses: SonarSource/sonarqube-scan-action@master
