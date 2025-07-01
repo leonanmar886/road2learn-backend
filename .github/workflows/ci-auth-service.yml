@@ -63,12 +63,12 @@ jobs:
           args: >
             -Dsonar.projectKey=r2l-backend-auth
             -Dsonar.projectName="Auth Service"
+            -Dsonar.organization=leonanmar886
             -Dsonar.java.binaries=./authService/build/classes
             -Dsonar.java.source=17
             -Dsonar.coverage.jacoco.xmlReportPaths=./authService/build/reports/jacoco/test/jacocoTestReport.xml
             -Dsonar.sources=./authService/src/main/java
             -Dsonar.tests=./authService/src/test/java
-            -Dsonar.java.source=17
             -Dsonar.qualitygate.wait=true
 
   dependency-submission:

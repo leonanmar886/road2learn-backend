@@ -64,12 +64,12 @@ jobs:
           args: >
             -Dsonar.projectKey=r2l-backend-user
             -Dsonar.projectName="User Service"
+            -Dsonar.organization=leonanmar886
             -Dsonar.java.binaries=./userService/build/classes
             -Dsonar.java.source=17
             -Dsonar.coverage.jacoco.xmlReportPaths=./userService/build/reports/jacoco/test/jacocoTestReport.xml
             -Dsonar.sources=./userService/src/main/java
             -Dsonar.tests=./userService/src/test/java
-            -Dsonar.java.source=17
             -Dsonar.qualitygate.wait=true
 
   dependency-submission:

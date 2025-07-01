@@ -64,12 +64,12 @@ jobs:
           args: >
             -Dsonar.projectKey=r2l-backend-gateway
             -Dsonar.projectName="Gateway Service"
+            -Dsonar.organization=leonanmar886
             -Dsonar.java.binaries=./gatewayService/build/classes
             -Dsonar.java.source=17
             -Dsonar.coverage.jacoco.xmlReportPaths=./gatewayService/build/reports/jacoco/test/jacocoTestReport.xml
             -Dsonar.sources=./gatewayService/src/main/java
             -Dsonar.tests=./gatewayService/src/test/java
-            -Dsonar.java.source=17
             -Dsonar.qualitygate.wait=true
 
   dependency-submission:

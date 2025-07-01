@@ -54,12 +54,12 @@ jobs:
           args: >
             -Dsonar.projectKey=r2l-backend-study-plans
             -Dsonar.projectName="Study Plans Service"
+            -Dsonar.organization=leonanmar886
             -Dsonar.java.binaries=./studyPlansService/build/classes
             -Dsonar.java.source=17
             -Dsonar.coverage.jacoco.xmlReportPaths=./studyPlansService/build/reports/jacoco/test/jacocoTestReport.xml
             -Dsonar.sources=./studyPlansService/src/main/java
             -Dsonar.tests=./studyPlansService/src/test/java
-            -Dsonar.java.source=17
             -Dsonar.qualitygate.wait=true
 
   dependency-submission:
