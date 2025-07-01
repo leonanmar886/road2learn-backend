@@ -3,9 +3,8 @@ package com.r2l.studyPlansService.filter;
 import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.springframework.beans.factory.annotation.Value;
-
 import java.io.IOException;
+import org.springframework.beans.factory.annotation.Value;
 
 public class GatewaySecurityFilter implements Filter {
 
