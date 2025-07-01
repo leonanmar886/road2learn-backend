@@ -6,8 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class TextAnalysisExtractionServiceApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(TextAnalysisExtractionServiceApplication.class, args);
-	}
-
+  public static void main(String[] args) {
+    SpringApplication.run(TextAnalysisExtractionServiceApplication.class, args);
+  }
 }

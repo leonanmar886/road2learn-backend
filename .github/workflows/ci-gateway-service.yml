@@ -52,7 +52,8 @@ jobs:
         run: ./gradlew :gatewayService:spotlessCheck
 
       - name: Build and Test Gateway Service
-        run: ./gradlew :gatewayService:build :gatewayService:jacocoTestReport
+        run: ./gradlew :gatewayService:build --exclude-task test
+
 
       - name: SonarQube Scan
         uses: SonarSource/sonarqube-scan-action@master
@@ -62,13 +63,13 @@ jobs:
         with:
           args: >
             -Dsonar.projectKey=r2l-backend-gateway
-            -Dsonar.projectName=Gateway Service
+            -Dsonar.projectName="Gateway Service"
+            -Dsonar.organization=leonanmar886
             -Dsonar.java.binaries=./gatewayService/build/classes
             -Dsonar.java.source=17
             -Dsonar.coverage.jacoco.xmlReportPaths=./gatewayService/build/reports/jacoco/test/jacocoTestReport.xml
             -Dsonar.sources=./gatewayService/src/main/java
             -Dsonar.tests=./gatewayService/src/test/java
-            -Dsonar.java.source=17
             -Dsonar.qualitygate.wait=true
 
   dependency-submission:

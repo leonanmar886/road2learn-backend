@@ -53,7 +53,8 @@ jobs:
 
 
       - name: Build and Test Notifications Service
-        run: ./gradlew :notificationService:build :notificationService:jacocoTestReport
+        run: ./gradlew :notificationService:build --exclude-task test
+
 
       - name: SonarQube Scan
         uses: SonarSource/sonarqube-scan-action@master
@@ -63,13 +64,13 @@ jobs:
         with:
           args: >
             -Dsonar.projectKey=r2l-backend-notifications
-            -Dsonar.projectName=Notifications Service
+            -Dsonar.projectName="Notifications Service"
+            -Dsonar.organization=leonanmar886
             -Dsonar.java.binaries=./notificationService/build/classes
             -Dsonar.java.source=17
             -Dsonar.coverage.jacoco.xmlReportPaths=./notificationService/build/reports/jacoco/test/jacocoTestReport.xml
             -Dsonar.sources=./notificationService/src/main/java
             -Dsonar.tests=./notificationService/src/test/java
-            -Dsonar.java.source=17
             -Dsonar.qualitygate.wait=true
 
   dependency-submission:

@@ -2,6 +2,9 @@ plugins {
 	id 'java'
 	id 'org.springframework.boot' version '3.5.1'
 	id 'io.spring.dependency-management' version '1.1.7'
+	id 'jacoco'
+	id 'com.diffplug.spotless' version '6.25.0'
+	id 'org.owasp.dependencycheck' version '8.4.3'
 }
 
 group = 'com.r2l'
@@ -43,4 +46,37 @@ dependencyManagement {
 
 tasks.named('test') {
 	useJUnitPlatform()
+}
+
+tasks.named('bootJar') {
+	mainClass = 'com.r2l.gatewayService.GatewayServiceApplication'
+}
+
+jacoco {
+	toolVersion = "0.8.11"
+}
+
+jacocoTestReport {
+	reports {
+		xml.required = true
+		html.required = true
+	}
+}
+
+test {
+	finalizedBy jacocoTestReport
+}
+
+spotless {
+	java {
+		googleJavaFormat()
+	}
+}
+
+dependencyCheck {
+	formats = ['HTML', 'XML']
+	failBuildOnCVSS = 7
+	analyzers {
+		assemblyEnabled = false
+	}
 }

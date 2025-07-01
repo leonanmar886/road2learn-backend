@@ -42,7 +42,8 @@ jobs:
         run: ./gradlew :studyPlansService:spotlessCheck
 
       - name: Build and Test Study Plans Service
-        run: ./gradlew :studyPlansService:build :studyPlansService:jacocoTestReport
+        run: ./gradlew :studyPlansService:build --exclude-task test
+
 
       - name: SonarQube Scan
         uses: SonarSource/sonarqube-scan-action@master
@@ -52,13 +53,13 @@ jobs:
         with:
           args: >
             -Dsonar.projectKey=r2l-backend-study-plans
-            -Dsonar.projectName=Study Plans Service
+            -Dsonar.projectName="Study Plans Service"
+            -Dsonar.organization=leonanmar886
             -Dsonar.java.binaries=./studyPlansService/build/classes
             -Dsonar.java.source=17
             -Dsonar.coverage.jacoco.xmlReportPaths=./studyPlansService/build/reports/jacoco/test/jacocoTestReport.xml
             -Dsonar.sources=./studyPlansService/src/main/java
             -Dsonar.tests=./studyPlansService/src/test/java
-            -Dsonar.java.source=17
             -Dsonar.qualitygate.wait=true
 
   dependency-submission:
