@@ -63,7 +63,7 @@ jobs:
         with:
           args: >
             -Dsonar.projectKey=r2l-backend-gateway
-            -Dsonar.projectName=Gateway Service
+            -Dsonar.projectName="Gateway Service"
             -Dsonar.java.binaries=./gatewayService/build/classes
             -Dsonar.java.source=17
             -Dsonar.coverage.jacoco.xmlReportPaths=./gatewayService/build/reports/jacoco/test/jacocoTestReport.xml

@@ -63,7 +63,7 @@ jobs:
         with:
           args: >
             -Dsonar.projectKey=r2l-backend-auth
-            -Dsonar.projectName=Auth Service
+            -Dsonar.projectName="Auth Service"
             -Dsonar.java.binaries=./authService/build/classes
             -Dsonar.java.source=17
             -Dsonar.coverage.jacoco.xmlReportPaths=./authService/build/reports/jacoco/test/jacocoTestReport.xml

@@ -53,7 +53,7 @@ jobs:
         with:
           args: >
             -Dsonar.projectKey=r2l-backend-study-plans
-            -Dsonar.projectName=Study Plans Service
+            -Dsonar.projectName="Study Plans Service"
             -Dsonar.java.binaries=./studyPlansService/build/classes
             -Dsonar.java.source=17
             -Dsonar.coverage.jacoco.xmlReportPaths=./studyPlansService/build/reports/jacoco/test/jacocoTestReport.xml
