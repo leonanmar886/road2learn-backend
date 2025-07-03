@@ -17,7 +17,7 @@ public class SecurityConfig {
             authorize ->
                 authorize
                     .requestMatchers("/**")
-                    .permitAll() // Permite todas as requisições para qualquer caminho
+                    .permitAll()
                     .anyRequest()
                     .authenticated())
         .csrf(AbstractHttpConfigurer::disable);

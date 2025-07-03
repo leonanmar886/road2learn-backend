@@ -3,12 +3,13 @@ package com.r2l.authService.filter;
 import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.util.Enumeration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+
+import java.io.IOException;
+import java.util.Enumeration;
 
 @Component
 public class GatewaySecurityFilter implements Filter {
@@ -28,7 +29,6 @@ public class GatewaySecurityFilter implements Filter {
         httpRequest.getMethod(),
         httpRequest.getRequestURI());
 
-    // Log de todos os headers
     Enumeration<String> headerNames = httpRequest.getHeaderNames();
     while (headerNames.hasMoreElements()) {
       String headerName = headerNames.nextElement();
