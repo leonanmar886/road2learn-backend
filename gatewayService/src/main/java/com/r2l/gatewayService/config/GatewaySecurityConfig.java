@@ -1,5 +1,3 @@
-// src/main/java/com/r2l/gatewayService/config/GatewaySecurityConfig.java (ou similar)
-
 package com.r2l.gatewayService.config; // Ajuste o pacote conforme sua estrutura
 
 import org.springframework.context.annotation.Bean;
@@ -12,13 +10,10 @@ import org.springframework.security.web.server.SecurityWebFilterChain;
 @EnableWebFluxSecurity
 public class GatewaySecurityConfig {
 
-	@Bean
-	public SecurityWebFilterChain springSecurityFilterChain(ServerHttpSecurity http) {
-		http
-				.csrf(ServerHttpSecurity.CsrfSpec::disable)
-				.authorizeExchange(exchange -> exchange
-						.anyExchange().permitAll()
-				);
-		return http.build();
-	}
+  @Bean
+  public SecurityWebFilterChain springSecurityFilterChain(ServerHttpSecurity http) {
+    http.csrf(ServerHttpSecurity.CsrfSpec::disable)
+        .authorizeExchange(exchange -> exchange.anyExchange().permitAll());
+    return http.build();
+  }
 }
