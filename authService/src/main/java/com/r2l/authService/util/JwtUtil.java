@@ -15,22 +15,21 @@ import java.util.Date;
 @Component
 public class JwtUtil {
 
-	private final PrivateKey privateKey;
+  private final PrivateKey privateKey;
 
-	public JwtUtil(@Value("classpath:private_key.pem") Resource privateKeyResource) throws Exception {
-		try (InputStream inputStream = privateKeyResource.getInputStream()) {
-			String key = new String(inputStream.readAllBytes(), StandardCharsets.UTF_8);
-			this.privateKey = PemUtils.parsePrivateKey(key);
-		}
-	}
+  public JwtUtil(@Value("classpath:private_key.pem") Resource privateKeyResource) throws Exception {
+    try (InputStream inputStream = privateKeyResource.getInputStream()) {
+      String key = new String(inputStream.readAllBytes(), StandardCharsets.UTF_8);
+      this.privateKey = PemUtils.parsePrivateKey(key);
+    }
+  }
 
-	public String generateToken(UserDetails userDetails) {
-		return Jwts.builder()
-				.setSubject(userDetails.getUsername())
-				.setIssuedAt(new Date())
-				.setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 10))
-				.signWith(privateKey, SignatureAlgorithm.RS256)
-				.compact();
-	}
-
+  public String generateToken(UserDetails userDetails) {
+    return Jwts.builder()
+        .setSubject(userDetails.getUsername())
+        .setIssuedAt(new Date())
+        .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 10))
+        .signWith(privateKey, SignatureAlgorithm.RS256)
+        .compact();
+  }
 }

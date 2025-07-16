@@ -24,7 +24,9 @@ public class GlobalExceptionHandler {
         .body("An error occurred: " + ex.getMessage());
   }
 
-  public ResponseEntity<String> handleCreateUserLoginWithCredentialsException(CreateUserProfileException ex) {
+    @ExceptionHandler(UserLoginWithCredentialsException.class)
+  public ResponseEntity<String> handleCreateUserLoginWithCredentialsException(
+            UserLoginWithCredentialsException ex) {
     return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(ex.getMessage());
   }
 }

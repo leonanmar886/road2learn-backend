@@ -13,17 +13,18 @@ import java.security.spec.PKCS8EncodedKeySpec;
 
 public final class PemUtils {
 
-	private PemUtils() {
-		throw new IllegalStateException("Utility class");
-	}
+  private PemUtils() {
+    throw new IllegalStateException("Utility class");
+  }
 
-	public static PrivateKey parsePrivateKey(String key) throws IOException, NoSuchAlgorithmException, InvalidKeySpecException {
-		try (PemReader pemReader = new PemReader(new StringReader(key))) {
-			PemObject pemObject = pemReader.readPemObject();
-			byte[] content = pemObject.getContent();
-			PKCS8EncodedKeySpec keySpec = new PKCS8EncodedKeySpec(content);
-			KeyFactory keyFactory = KeyFactory.getInstance("RSA");
-			return keyFactory.generatePrivate(keySpec);
-		}
-	}
+  public static PrivateKey parsePrivateKey(String key)
+      throws IOException, NoSuchAlgorithmException, InvalidKeySpecException {
+    try (PemReader pemReader = new PemReader(new StringReader(key))) {
+      PemObject pemObject = pemReader.readPemObject();
+      byte[] content = pemObject.getContent();
+      PKCS8EncodedKeySpec keySpec = new PKCS8EncodedKeySpec(content);
+      KeyFactory keyFactory = KeyFactory.getInstance("RSA");
+      return keyFactory.generatePrivate(keySpec);
+    }
+  }
 }

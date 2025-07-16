@@ -55,8 +55,9 @@ public class AuthenticationService {
     }
   }
 
-  public LoginEmailAndPasswordResponseDTO loginWithEmailAndPassword(LoginEmailAndPasswordRequestDTO dto) {
-    Authentication auth = null;
+  public LoginEmailAndPasswordResponseDTO loginWithEmailAndPassword(
+      LoginEmailAndPasswordRequestDTO dto) {
+    Authentication auth;
 
     try {
       auth = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(dto.email(), dto.password()));

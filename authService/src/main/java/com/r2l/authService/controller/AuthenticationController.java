@@ -26,8 +26,10 @@ public class AuthenticationController {
   }
 
   @PostMapping("/login")
-  public ResponseEntity<LoginEmailAndPasswordResponseDTO> loginWithEmailAndPassword(@RequestBody @Valid LoginEmailAndPasswordRequestDTO body) {
-    LoginEmailAndPasswordResponseDTO response = authenticationService.loginWithEmailAndPassword(body);
+  public ResponseEntity<LoginEmailAndPasswordResponseDTO> loginWithEmailAndPassword(
+      @RequestBody @Valid LoginEmailAndPasswordRequestDTO body) {
+    LoginEmailAndPasswordResponseDTO response =
+        authenticationService.loginWithEmailAndPassword(body);
     return ResponseEntity.ok(response);
   }
 }
