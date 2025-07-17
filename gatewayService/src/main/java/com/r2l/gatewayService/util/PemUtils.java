@@ -1,8 +1,5 @@
 package com.r2l.gatewayService.util;
 
-import org.bouncycastle.util.io.pem.PemObject;
-import org.bouncycastle.util.io.pem.PemReader;
-
 import java.io.IOException;
 import java.io.StringReader;
 import java.security.KeyFactory;
@@ -10,6 +7,8 @@ import java.security.NoSuchAlgorithmException;
 import java.security.PublicKey;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.X509EncodedKeySpec;
+import org.bouncycastle.util.io.pem.PemObject;
+import org.bouncycastle.util.io.pem.PemReader;
 
 public final class PemUtils {
 
