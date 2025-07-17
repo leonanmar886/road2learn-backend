@@ -26,83 +26,85 @@ import java.util.List;
 @Slf4j
 public class JwtAuthenticationFilter implements GlobalFilter {
 
-	@Value("classpath:public_key.pem")
-	private Resource publicKeyResource;
+  @Value("classpath:public_key.pem")
+  private Resource publicKeyResource;
 
-	private PublicKey publicKey;
+  private PublicKey publicKey;
 
-	@PostConstruct
-	public void init() throws Exception {
-		try (InputStream inputStream = publicKeyResource.getInputStream()) {
-			String key = new String(inputStream.readAllBytes(), StandardCharsets.UTF_8);
-			this.publicKey = PemUtils.parsePublicKey(key);
-			log.info("Public key loaded successfully in Gateway.");
-		} catch (Exception e) {
-			log.error("Error loading public key in Gateway: {}", e.getMessage(), e);
-			throw e;
-		}
-	}
+  @PostConstruct
+  public void init() throws Exception {
+    try (InputStream inputStream = publicKeyResource.getInputStream()) {
+      String key = new String(inputStream.readAllBytes(), StandardCharsets.UTF_8);
+      this.publicKey = PemUtils.parsePublicKey(key);
+      log.info("Public key loaded successfully in Gateway.");
+    } catch (Exception e) {
+      log.error("Error loading public key in Gateway: {}", e.getMessage(), e);
+      throw e;
+    }
+  }
 
-	private Mono<Void> onError(ServerWebExchange exchange, String err, HttpStatus httpStatus) {
-		ServerHttpResponse response = exchange.getResponse();
-		response.setStatusCode(httpStatus);
-		log.error("Authentication error: {}", err);
-		return response.setComplete();
-	}
+  private Mono<Void> onError(ServerWebExchange exchange, String err, HttpStatus httpStatus) {
+    ServerHttpResponse response = exchange.getResponse();
+    response.setStatusCode(httpStatus);
+    log.error("Authentication error: {}", err);
+    return response.setComplete();
+  }
 
-	@Override
-	public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
-		ServerHttpRequest request = exchange.getRequest();
+  @Override
+  public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
+    ServerHttpRequest request = exchange.getRequest();
 
-		final List<String> openApiEndpoints = List.of(
-				"/api/auth/login",
-				"/api/auth/register",
-				"/api/auth"
-		);
+    final List<String> openApiEndpoints =
+        List.of("/api/auth/login", "/api/auth/register", "/api/auth");
 
-		String path = request.getURI().getPath();
+    String path = request.getURI().getPath();
 
-		if (openApiEndpoints.contains(path) || path.startsWith("/api/auth/")) {
-			return chain.filter(exchange);
-		}
+    if (openApiEndpoints.contains(path) || path.startsWith("/api/auth/")) {
+      return chain.filter(exchange);
+    }
 
-		if (!request.getHeaders().containsKey(HttpHeaders.AUTHORIZATION)) {
-			return this.onError(exchange, "Unauthorized: Authorization header missing.", HttpStatus.UNAUTHORIZED);
-		}
+    if (!request.getHeaders().containsKey(HttpHeaders.AUTHORIZATION)) {
+      return this.onError(
+          exchange, "Unauthorized: Authorization header missing.", HttpStatus.UNAUTHORIZED);
+    }
 
-		String authHeader = request.getHeaders().getFirst(HttpHeaders.AUTHORIZATION);
-		if (authHeader == null || !authHeader.startsWith("Bearer ")) {
-			return this.onError(exchange, "Unauthorized: Invalid Bearer token.", HttpStatus.UNAUTHORIZED);
-		}
+    String authHeader = request.getHeaders().getFirst(HttpHeaders.AUTHORIZATION);
+    if (authHeader == null || !authHeader.startsWith("Bearer ")) {
+      return this.onError(exchange, "Unauthorized: Invalid Bearer token.", HttpStatus.UNAUTHORIZED);
+    }
 
-		String token = authHeader.substring(7);
+    String token = authHeader.substring(7);
 
-		try {
-			Claims claims = Jwts.parserBuilder()
-					.setSigningKey(publicKey)
-					.build()
-					.parseClaimsJws(token)
-					.getBody();
+    try {
+      Claims claims =
+          Jwts.parserBuilder().setSigningKey(publicKey).build().parseClaimsJws(token).getBody();
 
-			Date expiration = claims.getExpiration();
-			if (expiration != null && expiration.before(new Date())) {
-				return this.onError(exchange, "Unauthorized: Token expired.", HttpStatus.UNAUTHORIZED);
-			}
+      Date expiration = claims.getExpiration();
+      if (expiration != null && expiration.before(new Date())) {
+        return this.onError(exchange, "Unauthorized: Token expired.", HttpStatus.UNAUTHORIZED);
+      }
 
-			ServerHttpRequest modifiedRequest = request.mutate()
-					.header("X-User-Id", claims.getSubject())
-					.build();
+      ServerHttpRequest modifiedRequest =
+          request.mutate().header("X-User-Id", claims.getSubject()).build();
 
-			log.info("Valid JWT token for user: {}", claims.getSubject());
-			return chain.filter(exchange.mutate().request(modifiedRequest).build());
+      log.info("Valid JWT token for user: {}", claims.getSubject());
+      return chain.filter(exchange.mutate().request(modifiedRequest).build());
 
-		} catch (SignatureException | MalformedJwtException | UnsupportedJwtException | IllegalArgumentException e) {
-			return this.onError(exchange, "Unauthorized: Invalid JWT token. " + e.getMessage(), HttpStatus.UNAUTHORIZED);
-		} catch (ExpiredJwtException e) {
-			return this.onError(exchange, "Unauthorized: Expired JWT token. " + e.getMessage(), HttpStatus.UNAUTHORIZED);
-		} catch (Exception e) {
-			log.error("Unexpected error during JWT validation: {}", e.getMessage(), e);
-			return this.onError(exchange, "Internal server error during token validation.", HttpStatus.INTERNAL_SERVER_ERROR);
-		}
-	}
+    } catch (SignatureException
+        | MalformedJwtException
+        | UnsupportedJwtException
+        | IllegalArgumentException e) {
+      return this.onError(
+          exchange, "Unauthorized: Invalid JWT token. " + e.getMessage(), HttpStatus.UNAUTHORIZED);
+    } catch (ExpiredJwtException e) {
+      return this.onError(
+          exchange, "Unauthorized: Expired JWT token. " + e.getMessage(), HttpStatus.UNAUTHORIZED);
+    } catch (Exception e) {
+      log.error("Unexpected error during JWT validation: {}", e.getMessage(), e);
+      return this.onError(
+          exchange,
+          "Internal server error during token validation.",
+          HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+  }
 }

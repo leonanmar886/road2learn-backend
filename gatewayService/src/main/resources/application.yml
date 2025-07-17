@@ -19,7 +19,7 @@ spring:
             - id: authentication-service
               uri: http://localhost:8001
               predicates:
-                - Path=/api/auth/** # <--- Simplificado para apenas este predicate
+                - Path=/api/auth/**
               filters:
                 - StripPrefix=1
                 - AddRequestHeader=X-Gateway-Token,${GATEWAY_SECRET:r2l-gateway-secret}
@@ -29,7 +29,7 @@ spring:
               predicates:
                 - Path=/api/notification/**
               filters:
-                - StripPrefix=2
+                - StripPrefix=1
                 - AddRequestHeader=X-Gateway-Token,${GATEWAY_SECRET:r2l-gateway-secret}
 
             - id: study-plans-service
@@ -37,7 +37,7 @@ spring:
               predicates:
                 - Path=/api/study-plans/**
               filters:
-                - StripPrefix=2
+                - StripPrefix=1
                 - AddRequestHeader=X-Gateway-Token,${GATEWAY_SECRET:r2l-gateway-secret}
 
 server:

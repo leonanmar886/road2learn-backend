@@ -60,7 +60,9 @@ public class AuthenticationService {
     Authentication auth;
 
     try {
-      auth = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(dto.email(), dto.password()));
+      auth =
+          authenticationManager.authenticate(
+              new UsernamePasswordAuthenticationToken(dto.email(), dto.password()));
     } catch (AuthenticationException ex) {
       throw new UserLoginWithCredentialsException("Invalid email or password");
     }
