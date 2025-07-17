@@ -47,6 +47,8 @@ jobs:
 
       - name: Check Dependencies
         run: ./gradlew :notificationService:dependencyCheckAnalyze
+        env:
+          OWASP_API_KEY: ${{ secrets.OWASP_API_KEY }}
 
       - name: Check Code Format
         run: ./gradlew :notificationService:spotlessCheck

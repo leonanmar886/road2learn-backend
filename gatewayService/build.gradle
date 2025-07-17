@@ -87,4 +87,7 @@ dependencyCheck {
 	analyzers {
 		assemblyEnabled = false
 	}
+	nvd {
+		apiKey = System.getenv('OWASP_API_KEY') ?: project.findProperty('owaspApiKey')
+	}
 }
