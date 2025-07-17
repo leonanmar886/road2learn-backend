@@ -23,4 +23,10 @@ public class GlobalExceptionHandler {
     return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
         .body("An error occurred: " + ex.getMessage());
   }
+
+  @ExceptionHandler(UserLoginWithCredentialsException.class)
+  public ResponseEntity<String> handleCreateUserLoginWithCredentialsException(
+      UserLoginWithCredentialsException ex) {
+    return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(ex.getMessage());
+  }
 }

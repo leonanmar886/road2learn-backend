@@ -28,7 +28,6 @@ public class GatewaySecurityFilter implements Filter {
         httpRequest.getMethod(),
         httpRequest.getRequestURI());
 
-    // Log de todos os headers
     Enumeration<String> headerNames = httpRequest.getHeaderNames();
     while (headerNames.hasMoreElements()) {
       String headerName = headerNames.nextElement();

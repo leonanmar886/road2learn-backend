@@ -4,7 +4,7 @@ plugins {
 	id 'io.spring.dependency-management' version '1.1.7'
 	id 'jacoco'
 	id 'com.diffplug.spotless' version '6.25.0'
-	id 'org.owasp.dependencycheck' version '8.4.3'
+	id 'org.owasp.dependencycheck' version '12.1.0'
 }
 
 group = 'com.r2l'
@@ -25,12 +25,12 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation 'org.springframework.boot:spring-boot-starter-amqp' // Removida a versão
-	implementation 'org.springframework.amqp:spring-rabbit' // Removida a versão
+	implementation 'org.springframework.boot:spring-boot-starter-amqp'
+	implementation 'org.springframework.amqp:spring-rabbit'
 	implementation 'org.springframework.boot:spring-boot-starter-actuator'
 	runtimeOnly 'org.postgresql:postgresql'
-	compileOnly 'org.projectlombok:lombok' // Removida a versão
-	annotationProcessor 'org.projectlombok:lombok' // Removida a versão
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
@@ -70,5 +70,8 @@ dependencyCheck {
 	failBuildOnCVSS = 7
 	analyzers {
 		assemblyEnabled = false
+	}
+	nvd {
+		apiKey = System.getenv('OWASP_API_KEY') ?: project.findProperty('owaspApiKey')
 	}
 }

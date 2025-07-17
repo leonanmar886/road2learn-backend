@@ -42,3 +42,5 @@ target/
 *.json
 *.cs
 *.http
+
+*.pem
