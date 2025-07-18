@@ -1,10 +1,13 @@
 package com.r2l.userService.models.entity;
 
 import jakarta.persistence.*;
+import lombok.Data;
+
 import java.util.UUID;
 
 @Entity
 @Table(name = "user-profile")
+@Data
 public class UserProfile {
 
   @Id
